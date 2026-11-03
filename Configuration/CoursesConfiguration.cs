@@ -22,6 +22,8 @@ namespace GNET90_EFCORE03.Configuration
             .WithOne(e => e.Course)
             .HasForeignKey(e => e.CourseId)
             .IsRequired(true);
+
+            builder.HasKey(c => c.Id);
         }
     }
 }

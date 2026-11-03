@@ -21,6 +21,8 @@ namespace GNET90_EFCORE03.Configuration
             .WithOne(s => s.Student)
             .HasForeignKey(s => s.StudentId);
 
+            builder.HasKey(c => c.Id);
+
         }
     }
 }
