@@ -23,6 +23,9 @@ namespace GNET90_EFCORE03.Configuration
             .OnDelete(DeleteBehavior.Cascade);
 
             builder.HasKey(i => i.Id);
+
+            builder.Property(c => c.Id)
+                .UseIdentityColumn(seed: 1000, increment: 1);
         }
     }
 }

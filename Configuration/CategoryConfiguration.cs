@@ -19,6 +19,9 @@ namespace GNET90_EFCORE03.Configuration
 
             builder.HasKey(c => c.ID);
 
+            builder.Property(c => c.ID)
+                .UseIdentityColumn(seed: 1000, increment: 1);
+
             builder.HasMany(ca => ca.Courses)
             .WithOne(c => c.Category)
             .HasForeignKey(co => co.CategoryId);

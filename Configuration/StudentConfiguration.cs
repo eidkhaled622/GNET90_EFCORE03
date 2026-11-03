@@ -17,6 +17,9 @@ namespace GNET90_EFCORE03.Configuration
             builder.Property(s => s.Email).IsRequired(true);
             builder.Property(s => s.DOB).IsRequired(true);
 
+            builder.Property(c => c.Id)
+                .UseIdentityColumn(seed: 1000, increment: 1);
+
             builder.HasMany(s => s.Enrollments)
             .WithOne(s => s.Student)
             .HasForeignKey(s => s.StudentId);

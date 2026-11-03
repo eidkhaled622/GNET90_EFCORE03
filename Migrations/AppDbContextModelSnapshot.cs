@@ -28,7 +28,7 @@ namespace GNET90_EFCORE03.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1000L);
 
                     b.Property<string>("Desc")
                         .HasColumnType("nvarchar(max)");
@@ -53,7 +53,7 @@ namespace GNET90_EFCORE03.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1000L);
 
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
@@ -133,7 +133,7 @@ namespace GNET90_EFCORE03.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1000L);
 
                     b.Property<string>("Bio")
                         .HasMaxLength(100)
@@ -163,7 +163,7 @@ namespace GNET90_EFCORE03.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1000L);
 
                     b.Property<DateTime>("DOB")
                         .HasColumnType("datetime2");

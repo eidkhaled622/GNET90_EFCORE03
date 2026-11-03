@@ -18,6 +18,9 @@ namespace GNET90_EFCORE03.Configuration
             builder.Property(c => c.Price).IsRequired(true).HasPrecision(8, 2);
             builder.Property(c => c.PublishDate).IsRequired(true);
 
+            builder.Property(c => c.Id)
+                .UseIdentityColumn(seed: 1000, increment: 1);
+
             builder.HasMany(c => c.Enrollments)
             .WithOne(e => e.Course)
             .HasForeignKey(e => e.CourseId)
