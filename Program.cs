@@ -178,21 +178,41 @@ if (!_context.Enrollments.Any())
 #endregion
 
 #region The SubCategory Levels
-var Category = "Programming";
+// var Category = "Programming";
 
-var GetTheCategory = await _context.Categories.FirstOrDefaultAsync(x => x.Name == Category);
+// var GetTheCategory = await _context.Categories.FirstOrDefaultAsync(x => x.Name == Category);
 
-if (GetTheCategory == null)
-{
-    Console.WriteLine("The Category is not giving");
-}
-else
-{
-    var SubCategory = await _context.Categories.Where(x => x.ParentID == GetTheCategory.ID).ToListAsync();
+// if (GetTheCategory == null)
+// {
+//     Console.WriteLine("The Category is not giving");
+// }
+// else
+// {
+//     var SubCategory = await _context.Categories.Where(x => x.ParentID == GetTheCategory.ID).ToListAsync();
 
-    foreach (var n in SubCategory)
-    {
-        Console.WriteLine($"{Category} ==> {n.Name}");
-    }
-}
+//     foreach (var n in SubCategory)
+//     {
+//         Console.WriteLine($"{Category} ==> {n.Name}");
+//     }
+// }
+#endregion
+
+#region Course Roaster
+int courseId = 1001;
+
+var studentIds = await _context.Enrollments
+    .Where(e => e.CourseId == courseId)
+    .Select(e => e.StudentId)
+    .ToListAsync();
+
+Console.WriteLine($"Students enrolled in course {courseId}: {studentIds.Count}");
+
+var students = await _context.Students
+    .Where(s => studentIds.Contains(s.Id))
+    .OrderBy(s => s.FullName)
+    .Select(s => s.FullName)
+    .ToListAsync();
+
+foreach (var name in students)
+    Console.WriteLine($"- {name}");
 #endregion
