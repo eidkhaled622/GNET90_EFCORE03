@@ -157,22 +157,42 @@ if (!_context.Enrollments.Any())
 #endregion
 
 #region filter Courses
-var courses = await _context.Courses.Where(c => c.Price >= 40 && c.Price <= 55).OrderByDescending(x => x.Price).Select(c => new
-{
-    c.Title,
-    c.Level,
-    c.Price
-}).ToListAsync();
+// var courses = await _context.Courses.Where(c => c.Price >= 40 && c.Price <= 55).OrderByDescending(x => x.Price).Select(c => new
+// {
+//     c.Title,
+//     c.Level,
+//     c.Price
+// }).ToListAsync();
 
-if (courses.Count() == 0)
+// if (courses.Count() == 0)
+// {
+//     Console.WriteLine("There is no data found");
+// }
+// else
+// {
+//     foreach (var x in courses)
+//     {
+//         Console.WriteLine($"{x.Title},--- ${x.Level} --- ${x.Price}");
+//     }
+// }
+#endregion
+
+#region The SubCategory Levels
+var Category = "Programming";
+
+var GetTheCategory = await _context.Categories.FirstOrDefaultAsync(x => x.Name == Category);
+
+if (GetTheCategory == null)
 {
-    Console.WriteLine("There is no data found");
+    Console.WriteLine("The Category is not giving");
 }
 else
 {
-    foreach (var x in courses)
+    var SubCategory = await _context.Categories.Where(x => x.ParentID == GetTheCategory.ID).ToListAsync();
+
+    foreach (var n in SubCategory)
     {
-        Console.WriteLine($"{x.Title},--- ${x.Level} --- ${x.Price}");
+        Console.WriteLine($"{Category} ==> {n.Name}");
     }
 }
 #endregion
