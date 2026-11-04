@@ -243,29 +243,46 @@ if (!_context.Enrollments.Any())
 #endregion
 
 #region Update Progress
-var courseID = 1000;
-var StudentID = 1001;
+// var courseID = 1000;
+// var StudentID = 1001;
 
-var findEnrollment = await _context.Enrollments.FindAsync(courseID, StudentID);
+// var findEnrollment = await _context.Enrollments.FindAsync(courseID, StudentID);
 
-if (findEnrollment == null)
-{
-    Console.WriteLine("The Enrollment does not Exist");
-}
+// if (findEnrollment == null)
+// {
+//     Console.WriteLine("The Enrollment does not Exist");
+// }
 
-var input = Console.ReadLine();
-int.TryParse(input, out int Progress);
-if (Progress < 0 || Progress > 100)
-{
-    Console.WriteLine("The input is Invalid");
-}
-else
-{
-    findEnrollment.Progress = Progress;
-    if (Progress == 100)
-    {
-        findEnrollment.Status = Status.Completed;
-    }
-    await _context.SaveChangesAsync();
-}
+// var input = Console.ReadLine();
+// int.TryParse(input, out int Progress);
+// if (Progress < 0 || Progress > 100)
+// {
+//     Console.WriteLine("The input is Invalid");
+// }
+// else
+// {
+//     findEnrollment.Progress = Progress;
+//     if (Progress == 100)
+//     {
+//         findEnrollment.Status = Status.Completed;
+//     }
+//     await _context.SaveChangesAsync();
+// }
+#endregion
+
+#region Update Course Date and State
+// var CourseID = 1003;
+
+// var getTheCourse = await _context.Courses.FindAsync(CourseID);
+
+// if (getTheCourse == null)
+// {
+//     Console.WriteLine("There is no courses Existing");
+// }
+
+// getTheCourse.PublishDate = DateTime.Now;
+// getTheCourse.IsPublished = !getTheCourse.IsPublished;
+
+// await _context.SaveChangesAsync();
+
 #endregion
