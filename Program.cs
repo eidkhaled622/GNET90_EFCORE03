@@ -5,6 +5,7 @@ using System.Security.Cryptography.X509Certificates;
 using GNET90_EFCORE03.Data;
 using GNET90_EFCORE03.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query.Internal;
 using Microsoft.Identity.Client.Extensibility;
 
 using AppDbContext _context = new AppDbContext();
@@ -288,20 +289,54 @@ if (!_context.Enrollments.Any())
 #endregion
 
 #region Remove The Enrollment
-var courseID = 1002;
-var StudentID = 1002;
+// var courseID = 1002;
+// var StudentID = 1002;
 
-var Enrollment = await _context.Enrollments.FindAsync(StudentID, courseID);
+// var Enrollment = await _context.Enrollments.FindAsync(StudentID, courseID);
 
-if (Enrollment == null)
+// if (Enrollment == null)
+// {
+//     Console.WriteLine("Enrollment does not Exist");
+// }
+
+// else
+// {
+//     _context.Remove(Enrollment);
+//     await _context.SaveChangesAsync();
+//     Console.WriteLine("Record Removed");
+// }
+#endregion
+
+#region RemoveCategory
+var CategoryID = 1000;
+var Category = await _context.Categories.FindAsync(CategoryID);
+// if (Category == null)
+// {
+//     Console.WriteLine("the Category does not Exist");
+// }
+// else
+// {
+//     try
+//     {
+//         _context.Categories.Remove(Category);
+//         await _context.SaveChangesAsync();
+//     }
+//     catch (DbUpdateException err)
+//     {
+//         Console.WriteLine($"The error Statement : {err}");
+//     }
+//     //* This Shows the Error
+// }
+
+//* The Safe version
+var IsParent = await _context.Categories.AnyAsync(x => x.ParentID == CategoryID);
+if (IsParent)
 {
-    Console.WriteLine("Enrollment does not Exist");
+    Console.WriteLine("Can not Remove the Category because there is sub Categories");
 }
-
 else
 {
-    _context.Remove(Enrollment);
+    _context.Categories.Remove(Category);
     await _context.SaveChangesAsync();
-    Console.WriteLine("Record Removed");
 }
 #endregion
