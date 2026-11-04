@@ -286,3 +286,22 @@ if (!_context.Enrollments.Any())
 // await _context.SaveChangesAsync();
 
 #endregion
+
+#region Remove The Enrollment
+var courseID = 1002;
+var StudentID = 1002;
+
+var Enrollment = await _context.Enrollments.FindAsync(StudentID, courseID);
+
+if (Enrollment == null)
+{
+    Console.WriteLine("Enrollment does not Exist");
+}
+
+else
+{
+    _context.Remove(Enrollment);
+    await _context.SaveChangesAsync();
+    Console.WriteLine("Record Removed");
+}
+#endregion
