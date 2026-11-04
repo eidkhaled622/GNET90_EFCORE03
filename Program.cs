@@ -35,3 +35,16 @@ if (!_context.Enrollments.Any())
 
     await _context.SaveChangesAsync();
 }
+
+#region Create Instructor
+var Instructor = new Instructor
+{
+    FullName = "Omar Eid",
+    Email = "KhaledEid@example.com",
+    Bio = "FullStack instructor",
+    JoinDate = new DateTime(2022, 5, 20)
+};
+_context.Instructors.Add(Instructor);
+await _context.SaveChangesAsync();
+Console.WriteLine($"The Id Of the instructor : ${Instructor.Id}");
+#endregion
