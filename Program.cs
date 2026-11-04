@@ -310,23 +310,23 @@ if (!_context.Enrollments.Any())
 #region RemoveCategory
 var CategoryID = 1000;
 var Category = await _context.Categories.FindAsync(CategoryID);
-// if (Category == null)
-// {
-//     Console.WriteLine("the Category does not Exist");
-// }
-// else
-// {
-//     try
-//     {
-//         _context.Categories.Remove(Category);
-//         await _context.SaveChangesAsync();
-//     }
-//     catch (DbUpdateException err)
-//     {
-//         Console.WriteLine($"The error Statement : {err}");
-//     }
-//     //* This Shows the Error
-// }
+if (Category == null)
+{
+    Console.WriteLine("the Category does not Exist");
+}
+else
+{
+    try
+    {
+        _context.Categories.Remove(Category);
+        await _context.SaveChangesAsync();
+    }
+    catch (DbUpdateException err)
+    {
+        Console.WriteLine($"The error Statement : {err}");
+    }
+    //* This Shows the Error
+}
 
 //* The Safe version
 var IsParent = await _context.Categories.AnyAsync(x => x.ParentID == CategoryID);
@@ -339,4 +339,27 @@ else
     _context.Categories.Remove(Category);
     await _context.SaveChangesAsync();
 }
+#endregion
+
+#region RemoveCourse
+int courseId = 1002;
+
+var course = await _context.Courses.FindAsync(courseId);
+
+if (course is null)
+{
+    Console.WriteLine($"Course {courseId} does not exist.");
+    return;
+}
+
+int before = await _context.Enrollments.CountAsync(e => e.CourseId == courseId);
+Console.WriteLine($"Enrollments before delete: {before}");
+
+_context.Courses.Remove(course);
+await _context.SaveChangesAsync();
+
+int after = await _context.Enrollments.CountAsync(e => e.CourseId == courseId);
+Console.WriteLine($"Enrollments after delete: {after}");
+
+//! The Enrollment will be deleted because the Delete Behavior we have is Cascade which is gonna delete any related data in the enrollment table
 #endregion
