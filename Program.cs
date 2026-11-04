@@ -198,21 +198,45 @@ if (!_context.Enrollments.Any())
 #endregion
 
 #region Course Roaster
+// int courseId = 1001;
+
+// var studentIds = await _context.Enrollments
+//     .Where(e => e.CourseId == courseId)
+//     .Select(e => e.StudentId)
+//     .ToListAsync();
+
+// Console.WriteLine($"Students enrolled in course {courseId}: {studentIds.Count}");
+
+// var students = await _context.Students
+//     .Where(s => studentIds.Contains(s.Id))
+//     .OrderBy(s => s.FullName)
+//     .Select(s => s.FullName)
+//     .ToListAsync();
+
+// foreach (var name in students)
+//     Console.WriteLine($"- {name}");
+#endregion
+
+#region Update Price
 int courseId = 1001;
+decimal newPrice = 89.99m;
 
-var studentIds = await _context.Enrollments
-    .Where(e => e.CourseId == courseId)
-    .Select(e => e.StudentId)
-    .ToListAsync();
+var course = await _context.Courses.FindAsync(courseId);
 
-Console.WriteLine($"Students enrolled in course {courseId}: {studentIds.Count}");
+if (course is null)
+{
+    Console.WriteLine($"Course {courseId} does not exist.");
+}
+else if (newPrice < 0)
+{
+    Console.WriteLine("Price cannot be negative.");
+}
+else
+{
+    course.Price = newPrice;
 
-var students = await _context.Students
-    .Where(s => studentIds.Contains(s.Id))
-    .OrderBy(s => s.FullName)
-    .Select(s => s.FullName)
-    .ToListAsync();
+    await _context.SaveChangesAsync();
 
-foreach (var name in students)
-    Console.WriteLine($"- {name}");
+    Console.WriteLine($"price changed to {course.Price}.");
+}
 #endregion
