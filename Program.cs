@@ -37,14 +37,47 @@ if (!_context.Enrollments.Any())
 }
 
 #region Create Instructor
-var Instructor = new Instructor
+// var Instructor = new Instructor
+// {
+//     FullName = "Omar Eid",
+//     Email = "KhaledEid@example.com",
+//     Bio = "FullStack instructor",
+//     JoinDate = new DateTime(2022, 5, 20)
+// };
+// await _context.Instructors.AddAsync(Instructor);
+// await _context.SaveChangesAsync();
+// Console.WriteLine($"The Id Of the instructor : ${Instructor.Id}");
+#endregion
+
+#region CreateCourse
+var InstructorId = 1006;
+var CategoryId = 1000;
+
+var InstructorExists = await _context.Instructors.FindAsync(InstructorId);
+var CategoryExists = await _context.Instructors.FindAsync(CategoryId);
+
+if (InstructorExists == null)
 {
-    FullName = "Omar Eid",
-    Email = "KhaledEid@example.com",
-    Bio = "FullStack instructor",
-    JoinDate = new DateTime(2022, 5, 20)
-};
-_context.Instructors.Add(Instructor);
-await _context.SaveChangesAsync();
-Console.WriteLine($"The Id Of the instructor : ${Instructor.Id}");
+    Console.WriteLine("The Instructor Provided is not Existed");
+}
+else if (CategoryExists == null)
+{
+    Console.WriteLine("The Category Provided is not Existed");
+}
+else
+{
+    var Course = new Course
+    {
+        Title = "Clean Architecture in .NET",
+        Description = "Layers, dependencies and testing",
+        Price = 69.99m,
+        Level = CourseLevel.Intermediate,
+        IsPublished = true,
+        InstructorId = InstructorId,
+        CategoryId = CategoryId
+    };
+    await _context.AddAsync(Course);
+    await _context.SaveChangesAsync();
+    Console.WriteLine($"This Course Added : ${Course.Id}");
+}
 #endregion
