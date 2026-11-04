@@ -135,23 +135,44 @@ if (!_context.Enrollments.Any())
 #endregion
 
 #region read Course
-var CourseId = 1004;
-var Title = "Web Development";
+// var CourseId = 1004;
+// var Title = "Web Development";
 
-var getCourseByID = await _context.Courses.FindAsync(CourseId);
-var getCourseByTitle = await _context.Courses.FirstOrDefaultAsync(x => x.Title == Title);
+// var getCourseByID = await _context.Courses.FindAsync(CourseId);
+// var getCourseByTitle = await _context.Courses.FirstOrDefaultAsync(x => x.Title == Title);
 
-if (getCourseByID == null)
+// if (getCourseByID == null)
+// {
+//     Console.WriteLine("The Course Does not Exist By Id", CourseId);
+// }
+// else if (getCourseByTitle == null)
+// {
+//     Console.WriteLine("The Course Does not Exist By Id", Title);
+// }
+// else
+// {
+//     Console.WriteLine($"The Course ExistBy ID ${getCourseByID.Id}");
+//     Console.WriteLine($"The Course ExistBy Title ${getCourseByTitle.Id}");
+// }
+#endregion
+
+#region filter Courses
+var courses = await _context.Courses.Where(c => c.Price >= 40 && c.Price <= 55).OrderByDescending(x => x.Price).Select(c => new
 {
-    Console.WriteLine("The Course Does not Exist By Id", CourseId);
-}
-else if (getCourseByTitle == null)
+    c.Title,
+    c.Level,
+    c.Price
+}).ToListAsync();
+
+if (courses.Count() == 0)
 {
-    Console.WriteLine("The Course Does not Exist By Id", Title);
+    Console.WriteLine("There is no data found");
 }
 else
 {
-    Console.WriteLine($"The Course ExistBy ID ${getCourseByID.Id}");
-    Console.WriteLine($"The Course ExistBy Title ${getCourseByTitle.Id}");
+    foreach (var x in courses)
+    {
+        Console.WriteLine($"{x.Title},--- ${x.Level} --- ${x.Price}");
+    }
 }
 #endregion
