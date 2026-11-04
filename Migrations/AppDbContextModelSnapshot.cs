@@ -45,6 +45,41 @@ namespace GNET90_EFCORE03.Migrations
                     b.HasIndex("ParentID");
 
                     b.ToTable("Categories");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = 1000,
+                            Desc = "Programming courses",
+                            Name = "Programming"
+                        },
+                        new
+                        {
+                            ID = 1001,
+                            Desc = "Web development courses",
+                            Name = "Web Development",
+                            ParentID = 1000
+                        },
+                        new
+                        {
+                            ID = 1002,
+                            Desc = "Database courses",
+                            Name = "Databases",
+                            ParentID = 1001
+                        },
+                        new
+                        {
+                            ID = 1003,
+                            Desc = "Cloud computing courses",
+                            Name = "Cloud Computing"
+                        },
+                        new
+                        {
+                            ID = 1004,
+                            Desc = "Mobile development courses",
+                            Name = "Mobile Development",
+                            ParentID = 1000
+                        });
                 });
 
             modelBuilder.Entity("GNET90_EFCORE03.Models.Course", b =>
@@ -91,6 +126,80 @@ namespace GNET90_EFCORE03.Migrations
                     b.HasIndex("InstructorId");
 
                     b.ToTable("Courses");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1001,
+                            CategoryId = 1000,
+                            Description = "Introduction to C# programming.",
+                            InstructorId = 1000,
+                            IsPublished = true,
+                            Level = 0,
+                            Price = 49.99m,
+                            PublishDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Title = "C# Fundamentals"
+                        },
+                        new
+                        {
+                            Id = 1002,
+                            CategoryId = 1000,
+                            Description = "Core principles of relational database design.",
+                            InstructorId = 1001,
+                            IsPublished = true,
+                            Level = 0,
+                            Price = 59.99m,
+                            PublishDate = new DateTime(2024, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Title = "Database Design"
+                        },
+                        new
+                        {
+                            Id = 1003,
+                            CategoryId = 1002,
+                            Description = "Build web applications with modern tools.",
+                            InstructorId = 1001,
+                            IsPublished = true,
+                            Level = 0,
+                            Price = 69.99m,
+                            PublishDate = new DateTime(2024, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Title = "Web Development"
+                        },
+                        new
+                        {
+                            Id = 1004,
+                            CategoryId = 1000,
+                            Description = "An introduction to cloud platforms and services.",
+                            InstructorId = 1002,
+                            IsPublished = false,
+                            Level = 0,
+                            Price = 79.99m,
+                            PublishDate = new DateTime(2024, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Title = "Cloud Computing"
+                        },
+                        new
+                        {
+                            Id = 1005,
+                            CategoryId = 1000,
+                            Description = "Design and build reliable web APIs.",
+                            InstructorId = 1000,
+                            IsPublished = false,
+                            Level = 0,
+                            Price = 54.99m,
+                            PublishDate = new DateTime(2024, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Title = "API Development"
+                        },
+                        new
+                        {
+                            Id = 1006,
+                            CategoryId = 1000,
+                            Description = "Learn software testing fundamentals and practices.",
+                            InstructorId = 1002,
+                            IsPublished = false,
+                            Level = 0,
+                            Price = 44.99m,
+                            PublishDate = new DateTime(2024, 6, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Title = "Software Testing"
+                        });
                 });
 
             modelBuilder.Entity("GNET90_EFCORE03.Models.Enrollment", b =>
@@ -155,6 +264,32 @@ namespace GNET90_EFCORE03.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Instructors");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1000,
+                            Bio = "Computer science instructor",
+                            Email = "alex.morgan@example.com",
+                            FullName = "Alex Morgan",
+                            JoinDate = new DateTime(2020, 1, 15, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 1001,
+                            Bio = "Software development instructor",
+                            Email = "jamie.lee@example.com",
+                            FullName = "Jamie Lee",
+                            JoinDate = new DateTime(2021, 3, 10, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 1002,
+                            Bio = "Database instructor",
+                            Email = "taylor.reed@example.com",
+                            FullName = "Taylor Reed",
+                            JoinDate = new DateTime(2022, 5, 20, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        });
                 });
 
             modelBuilder.Entity("GNET90_EFCORE03.Models.Student", b =>
