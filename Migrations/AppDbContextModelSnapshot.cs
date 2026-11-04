@@ -130,7 +130,7 @@ namespace GNET90_EFCORE03.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 1001,
+                            Id = 1000,
                             CategoryId = 1000,
                             Description = "Introduction to C# programming.",
                             InstructorId = 1000,
@@ -142,7 +142,7 @@ namespace GNET90_EFCORE03.Migrations
                         },
                         new
                         {
-                            Id = 1002,
+                            Id = 1001,
                             CategoryId = 1000,
                             Description = "Core principles of relational database design.",
                             InstructorId = 1001,
@@ -154,7 +154,7 @@ namespace GNET90_EFCORE03.Migrations
                         },
                         new
                         {
-                            Id = 1003,
+                            Id = 1002,
                             CategoryId = 1002,
                             Description = "Build web applications with modern tools.",
                             InstructorId = 1001,
@@ -166,7 +166,7 @@ namespace GNET90_EFCORE03.Migrations
                         },
                         new
                         {
-                            Id = 1004,
+                            Id = 1003,
                             CategoryId = 1000,
                             Description = "An introduction to cloud platforms and services.",
                             InstructorId = 1002,
@@ -178,7 +178,7 @@ namespace GNET90_EFCORE03.Migrations
                         },
                         new
                         {
-                            Id = 1005,
+                            Id = 1004,
                             CategoryId = 1000,
                             Description = "Design and build reliable web APIs.",
                             InstructorId = 1000,
@@ -190,7 +190,7 @@ namespace GNET90_EFCORE03.Migrations
                         },
                         new
                         {
-                            Id = 1006,
+                            Id = 1005,
                             CategoryId = 1000,
                             Description = "Learn software testing fundamentals and practices.",
                             InstructorId = 1002,
