@@ -1,5 +1,6 @@
 ﻿
 
+using System.Diagnostics.CodeAnalysis;
 using GNET90_EFCORE03.Data;
 using GNET90_EFCORE03.Models;
 using Microsoft.EntityFrameworkCore;
@@ -49,35 +50,50 @@ if (!_context.Enrollments.Any())
 // Console.WriteLine($"The Id Of the instructor : ${Instructor.Id}");
 #endregion
 
-#region CreateCourse
-var InstructorId = 1006;
-var CategoryId = 1000;
+#region Create Course
+// var InstructorId = 1006;
+// var CategoryId = 1000;
 
-var InstructorExists = await _context.Instructors.FindAsync(InstructorId);
-var CategoryExists = await _context.Instructors.FindAsync(CategoryId);
+// var InstructorExists = await _context.Instructors.FindAsync(InstructorId);
+// var CategoryExists = await _context.Instructors.FindAsync(CategoryId);
 
-if (InstructorExists == null)
-{
-    Console.WriteLine("The Instructor Provided is not Existed");
-}
-else if (CategoryExists == null)
-{
-    Console.WriteLine("The Category Provided is not Existed");
-}
-else
-{
-    var Course = new Course
-    {
-        Title = "Clean Architecture in .NET",
-        Description = "Layers, dependencies and testing",
-        Price = 69.99m,
-        Level = CourseLevel.Intermediate,
-        IsPublished = true,
-        InstructorId = InstructorId,
-        CategoryId = CategoryId
-    };
-    await _context.AddAsync(Course);
-    await _context.SaveChangesAsync();
-    Console.WriteLine($"This Course Added : ${Course.Id}");
-}
+// if (InstructorExists == null)
+// {
+//     Console.WriteLine("The Instructor Provided is not Existed");
+// }
+// else if (CategoryExists == null)
+// {
+//     Console.WriteLine("The Category Provided is not Existed");
+// }
+// else
+// {
+//     var Course = new Course
+//     {
+//         Title = "Clean Architecture in .NET",
+//         Description = "Layers, dependencies and testing",
+//         Price = 69.99m,
+//         Level = CourseLevel.Intermediate,
+//         IsPublished = true,
+//         InstructorId = InstructorId,
+//         CategoryId = CategoryId
+//     };
+//     await _context.AddAsync(Course);
+//     await _context.SaveChangesAsync();
+//     Console.WriteLine($"This Course Added : ${Course.Id}");
+// }
+#endregion
+
+#region Add 3 Students
+// var Students = new[] {
+//     new Student { FullName = "Lucas Miller",   Email = "lucas.miller@example.com",   DOB = new DateTime(2000, 5, 19) },
+//     new Student { FullName = "Sophia Taylor",  Email = "sophia.taylor@example.com",  DOB = new DateTime(2002, 8, 3) },
+//     new Student { FullName = "Ethan Clark",    Email = "ethan.clark@example.com",    DOB = new DateTime(1998, 12, 27) }
+// };
+// await _context.AddRangeAsync(Students);
+// await _context.SaveChangesAsync();
+
+// foreach (var student in Students)
+// {
+//     Console.WriteLine($"The Student Id : ${student.Id}");
+// }
 #endregion
