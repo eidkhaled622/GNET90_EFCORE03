@@ -342,24 +342,31 @@ else
 #endregion
 
 #region RemoveCourse
-int courseId = 1002;
+// int courseId = 1002;
 
-var course = await _context.Courses.FindAsync(courseId);
+// var course = await _context.Courses.FindAsync(courseId);
 
-if (course is null)
-{
-    Console.WriteLine($"Course {courseId} does not exist.");
-    return;
-}
+// if (course is null)
+// {
+//     Console.WriteLine($"Course {courseId} does not exist.");
+//     return;
+// }
 
-int before = await _context.Enrollments.CountAsync(e => e.CourseId == courseId);
-Console.WriteLine($"Enrollments before delete: {before}");
+// int before = await _context.Enrollments.CountAsync(e => e.CourseId == courseId);
+// Console.WriteLine($"Enrollments before delete: {before}");
 
-_context.Courses.Remove(course);
-await _context.SaveChangesAsync();
+// _context.Courses.Remove(course);
+// await _context.SaveChangesAsync();
 
-int after = await _context.Enrollments.CountAsync(e => e.CourseId == courseId);
-Console.WriteLine($"Enrollments after delete: {after}");
+// int after = await _context.Enrollments.CountAsync(e => e.CourseId == courseId);
+// Console.WriteLine($"Enrollments after delete: {after}");
 
 //! The Enrollment will be deleted because the Delete Behavior we have is Cascade which is gonna delete any related data in the enrollment table
+#endregion
+
+#region Update the prices
+
+var affected = await _context.Courses.Where(x => x.IsPublished)
+                    .ExecuteUpdateAsync(s => s.SetProperty(p => p.Price, p => p.Price * 1.1m));
+Console.WriteLine(affected);
 #endregion
