@@ -5,6 +5,7 @@ using System.Security.Cryptography.X509Certificates;
 using GNET90_EFCORE03.Data;
 using GNET90_EFCORE03.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Identity.Client.Extensibility;
 
 using AppDbContext _context = new AppDbContext();
 
@@ -218,25 +219,53 @@ if (!_context.Enrollments.Any())
 #endregion
 
 #region Update Price
-int courseId = 1001;
-decimal newPrice = 89.99m;
+// int courseId = 1001;
+// decimal newPrice = 89.99m;
 
-var course = await _context.Courses.FindAsync(courseId);
+// var course = await _context.Courses.FindAsync(courseId);
 
-if (course is null)
+// if (course is null)
+// {
+//     Console.WriteLine($"Course {courseId} does not exist.");
+// }
+// else if (newPrice < 0)
+// {
+//     Console.WriteLine("Price cannot be negative.");
+// }
+// else
+// {
+//     course.Price = newPrice;
+
+//     await _context.SaveChangesAsync();
+
+//     Console.WriteLine($"price changed to ${course.Price}.");
+// }
+#endregion
+
+#region Update Progress
+var courseID = 1000;
+var StudentID = 1001;
+
+var findEnrollment = await _context.Enrollments.FindAsync(courseID, StudentID);
+
+if (findEnrollment == null)
 {
-    Console.WriteLine($"Course {courseId} does not exist.");
+    Console.WriteLine("The Enrollment does not Exist");
 }
-else if (newPrice < 0)
+
+var input = Console.ReadLine();
+int.TryParse(input, out int Progress);
+if (Progress < 0 || Progress > 100)
 {
-    Console.WriteLine("Price cannot be negative.");
+    Console.WriteLine("The input is Invalid");
 }
 else
 {
-    course.Price = newPrice;
-
+    findEnrollment.Progress = Progress;
+    if (Progress == 100)
+    {
+        findEnrollment.Status = Status.Completed;
+    }
     await _context.SaveChangesAsync();
-
-    Console.WriteLine($"price changed to {course.Price}.");
 }
 #endregion

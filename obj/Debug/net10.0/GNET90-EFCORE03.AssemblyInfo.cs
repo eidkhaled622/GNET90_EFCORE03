@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("GNET90-EFCORE03")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b07a49e4d8eacfc33ae1a55b0480053a7aaf4177")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0b6cd999150b2eea2a78aa51efae67dbe6347140")]
 [assembly: System.Reflection.AssemblyProductAttribute("GNET90-EFCORE03")]
 [assembly: System.Reflection.AssemblyTitleAttribute("GNET90-EFCORE03")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
