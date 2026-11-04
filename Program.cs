@@ -97,3 +97,38 @@ if (!_context.Enrollments.Any())
 //     Console.WriteLine($"The Student Id : ${student.Id}");
 // }
 #endregion
+
+#region Make Enrollment
+var StudentId = 1007;
+var CourseId = 1000;
+
+var StudentExists = await _context.Students.FindAsync(StudentId);
+var CoursesExists = await _context.Courses.FindAsync(CourseId);
+
+if (StudentExists == null)
+{
+    Console.WriteLine("Enrollment Refused : the Student does not exist");
+}
+else if (CoursesExists == null)
+{
+    Console.WriteLine("Enrollment Refused : the Course does not exist");
+}
+else if (await _context.Enrollments.AnyAsync(e => e.StudentId == StudentId && e.CourseId == CourseId))
+{
+    Console.WriteLine("Enrollment Refused : the Enrolment already exists");
+}
+else
+{
+    await _context.Enrollments.AddAsync(new Enrollment
+    {
+        EnrollDate = new DateTime(2024, 1, 15),
+        Progress = 100m,
+        Status = Status.Completed,
+        FinalGrade = 100m,
+        CourseId = CourseId,
+        StudentId = StudentId
+    });
+    await _context.SaveChangesAsync();
+    Console.WriteLine("The Enrollment Added Successfully");
+}
+#endregion
