@@ -308,37 +308,37 @@ if (!_context.Enrollments.Any())
 #endregion
 
 #region RemoveCategory
-var CategoryID = 1000;
-var Category = await _context.Categories.FindAsync(CategoryID);
-if (Category == null)
-{
-    Console.WriteLine("the Category does not Exist");
-}
-else
-{
-    try
-    {
-        _context.Categories.Remove(Category);
-        await _context.SaveChangesAsync();
-    }
-    catch (DbUpdateException err)
-    {
-        Console.WriteLine($"The error Statement : {err}");
-    }
-    //* This Shows the Error
-}
+// var CategoryID = 1000;
+// var Category = await _context.Categories.FindAsync(CategoryID);
+// if (Category == null)
+// {
+//     Console.WriteLine("the Category does not Exist");
+// }
+// else
+// {
+//     try
+//     {
+//         _context.Categories.Remove(Category);
+//         await _context.SaveChangesAsync();
+//     }
+//     catch (DbUpdateException err)
+//     {
+//         Console.WriteLine($"The error Statement : {err}");
+//     }
+//     //* This Shows the Error
+// }
 
-//* The Safe version
-var IsParent = await _context.Categories.AnyAsync(x => x.ParentID == CategoryID);
-if (IsParent)
-{
-    Console.WriteLine("Can not Remove the Category because there is sub Categories");
-}
-else
-{
-    _context.Categories.Remove(Category);
-    await _context.SaveChangesAsync();
-}
+// //* The Safe version
+// var IsParent = await _context.Categories.AnyAsync(x => x.ParentID == CategoryID);
+// if (IsParent)
+// {
+//     Console.WriteLine("Can not Remove the Category because there is sub Categories");
+// }
+// else
+// {
+//     _context.Categories.Remove(Category);
+//     await _context.SaveChangesAsync();
+// }
 #endregion
 
 #region RemoveCourse
@@ -366,7 +366,13 @@ else
 
 #region Update the prices
 
-var affected = await _context.Courses.Where(x => x.IsPublished)
-                    .ExecuteUpdateAsync(s => s.SetProperty(p => p.Price, p => p.Price * 1.1m));
+// var affected = await _context.Courses.Where(x => x.IsPublished)
+//                     .ExecuteUpdateAsync(s => s.SetProperty(p => p.Price, p => p.Price * 1.1m));
+// Console.WriteLine(affected);
+#endregion
+
+#region Delete bulk Data
+var affected = await _context.Enrollments.Where(x => x.Status == Status.Dropped)
+                    .ExecuteDeleteAsync();
 Console.WriteLine(affected);
 #endregion
