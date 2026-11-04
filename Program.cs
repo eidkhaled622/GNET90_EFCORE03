@@ -1,6 +1,7 @@
 ﻿
 
 using System.Diagnostics.CodeAnalysis;
+using System.Security.Cryptography.X509Certificates;
 using GNET90_EFCORE03.Data;
 using GNET90_EFCORE03.Models;
 using Microsoft.EntityFrameworkCore;
@@ -99,36 +100,58 @@ if (!_context.Enrollments.Any())
 #endregion
 
 #region Make Enrollment
-var StudentId = 1007;
-var CourseId = 1000;
+// var StudentId = 1007;
+// var CourseId = 1000;
 
-var StudentExists = await _context.Students.FindAsync(StudentId);
-var CoursesExists = await _context.Courses.FindAsync(CourseId);
+// var StudentExists = await _context.Students.FindAsync(StudentId);
+// var CoursesExists = await _context.Courses.FindAsync(CourseId);
 
-if (StudentExists == null)
+// if (StudentExists == null)
+// {
+//     Console.WriteLine("Enrollment Refused : the Student does not exist");
+// }
+// else if (CoursesExists == null)
+// {
+//     Console.WriteLine("Enrollment Refused : the Course does not exist");
+// }
+// else if (await _context.Enrollments.AnyAsync(e => e.StudentId == StudentId && e.CourseId == CourseId))
+// {
+//     Console.WriteLine("Enrollment Refused : the Enrolment already exists");
+// }
+// else
+// {
+//     await _context.Enrollments.AddAsync(new Enrollment
+//     {
+//         EnrollDate = new DateTime(2024, 1, 15),
+//         Progress = 100m,
+//         Status = Status.Completed,
+//         FinalGrade = 100m,
+//         CourseId = CourseId,
+//         StudentId = StudentId
+//     });
+//     await _context.SaveChangesAsync();
+//     Console.WriteLine("The Enrollment Added Successfully");
+// }
+#endregion
+
+#region read Course
+var CourseId = 1004;
+var Title = "Web Development";
+
+var getCourseByID = await _context.Courses.FindAsync(CourseId);
+var getCourseByTitle = await _context.Courses.FirstOrDefaultAsync(x => x.Title == Title);
+
+if (getCourseByID == null)
 {
-    Console.WriteLine("Enrollment Refused : the Student does not exist");
+    Console.WriteLine("The Course Does not Exist By Id", CourseId);
 }
-else if (CoursesExists == null)
+else if (getCourseByTitle == null)
 {
-    Console.WriteLine("Enrollment Refused : the Course does not exist");
-}
-else if (await _context.Enrollments.AnyAsync(e => e.StudentId == StudentId && e.CourseId == CourseId))
-{
-    Console.WriteLine("Enrollment Refused : the Enrolment already exists");
+    Console.WriteLine("The Course Does not Exist By Id", Title);
 }
 else
 {
-    await _context.Enrollments.AddAsync(new Enrollment
-    {
-        EnrollDate = new DateTime(2024, 1, 15),
-        Progress = 100m,
-        Status = Status.Completed,
-        FinalGrade = 100m,
-        CourseId = CourseId,
-        StudentId = StudentId
-    });
-    await _context.SaveChangesAsync();
-    Console.WriteLine("The Enrollment Added Successfully");
+    Console.WriteLine($"The Course ExistBy ID ${getCourseByID.Id}");
+    Console.WriteLine($"The Course ExistBy Title ${getCourseByTitle.Id}");
 }
 #endregion
